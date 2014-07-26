@@ -700,7 +700,7 @@
 
         function getExifFromNodeBuffer(buffer, onComplete) {
             var binaryResponse = new BinaryFile(buffer
-                    .toString('binary'), 0, Math.min(buffer.length, 1000000));
+                    .toString('binary'), 0, Math.min(buffer.length, 100000));
 
             var oEXIF = findEXIFinJPEG(binaryResponse);
             if (onComplete)
