@@ -1,0 +1,8 @@
+original upstream source is at,
+https://github.com/mattburns/exiftool.js
+
+Kept only the /src directory as the rest of the repository totals 267MB
+and things wouldn't be in the right place for a nodejs module anyway.
+
+original	16e412af6d0655c5e60aa1f138d56a85b86ac2ae
+this		38513c565ccc33c9a4bb082ded8069572210fb47
