@@ -681,21 +681,27 @@
             })
         }
 
-        function getExifFromLocalFileUsingNodeFs(fs, url, onComplete) {
-            fs.open(url, 'r', function(status, fd) {
-                if (status) {
-                    console.log(status.message);
+        function getExifFromLocalFileUsingNodeFs(fs, url, callback) {
+            fs.open(url, 'r', function(err, fd) {
+                if (err) {
+                    console.log(err.message);
+                    callback(err);
                     return;
                 }
                 var buffer = new Buffer(100000);
                 fs.read(fd, buffer, 0, 100000, 0, function(err, num) {
+                    if (err) {
+                        callback(err);
+                        return;
+                    }
 
                     var binaryResponse = new BinaryFile(buffer
                             .toString('binary'), 0, 1000000);
 
                     var oEXIF = findEXIFinJPEG(binaryResponse);
-                    if (onComplete)
-                        onComplete((oEXIF || {}), url);
+                    if (callback) {
+                        callback(null, (oEXIF || {}), url);
+                    }
 
                     fs.close(fd);
                 });
