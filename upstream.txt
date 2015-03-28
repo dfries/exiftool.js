@@ -6,3 +6,14 @@ and things wouldn't be in the right place for a nodejs module anyway.
 
 original	16e412af6d0655c5e60aa1f138d56a85b86ac2ae
 this		38513c565ccc33c9a4bb082ded8069572210fb47
+
+--------------------------------------------------
+to pull over updates
+
+git-filter-branch --index-filter 'git-rm --cached --ignore-unmatch -r test' filter_test
+
+git-filter-branch -f --tree-filter 'mv src/{README.md,exiftool.js,package.json} . || true' filter_test
+git-filter-branch -f --tree-filter 'mv src/README.md src/exiftool.js src/package.json . || true' filter_test
+git-filter-branch -f --prune-empty filter_test
+
+then cherry-pick stuff over
